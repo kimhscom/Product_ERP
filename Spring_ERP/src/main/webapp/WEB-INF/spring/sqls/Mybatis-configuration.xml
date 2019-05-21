@@ -2,11 +2,12 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
 	<typeAliases>
-		
+		<typeAlias type="com.happy.erp.dto.Account_DTO" alias="AccountDto"/>
+		<typeAlias type="com.happy.erp.dto.Pagination" alias="Pagination"/>
 	</typeAliases>
 	
 	<mappers>
-		
+		<mapper resource="/sqls/Statement_Account.xml"/>
 	</mappers>
 	
 </configuration>

@@ -36,14 +36,6 @@ public class Account_DTO implements Serializable {
 		this.account_regdate = account_regdate;
 	}
 	
-	@Override
-	public String toString() {
-		return "Account_DTO [account_id=" + account_id + ", account_pw=" + account_pw + ", account_name=" + account_name
-				+ ", account_phone=" + account_phone + ", account_email=" + account_email + ", account_code="
-				+ account_code + ", account_position=" + account_position + ", auth=" + auth + ", account_delfag="
-				+ account_delfag + ", account_regdate=" + account_regdate + "]";
-	}
-
 	public String getAccount_id() {
 		return account_id;
 	}
@@ -123,6 +115,13 @@ public class Account_DTO implements Serializable {
 	public void setAccount_regdate(String account_regdate) {
 		this.account_regdate = account_regdate;
 	}
-		
+	
+	@Override
+	public String toString() {
+		return "Account_DTO [account_id=" + account_id + ", account_pw=" + account_pw + ", account_name=" + account_name
+				+ ", account_phone=" + account_phone + ", account_email=" + account_email + ", account_code="
+				+ account_code + ", account_position=" + account_position + ", auth=" + auth + ", account_delfag="
+				+ account_delfag + ", account_regdate=" + account_regdate + "]";
+	}
 
 }

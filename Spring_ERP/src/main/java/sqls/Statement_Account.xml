@@ -9,15 +9,20 @@ VALUES(#{account_id}, #{account_pw}, #{account_name}, #{account_phone}, #{accoun
 </insert>
 
 <!-- 사용자 중복체크 -->
-<select id="idCheck" parameterType="java.lang.String" resultType="java.lang.String">
-SELECT ACCOUNT_ID FROM ACCOUNT WHERE ACCOUNT_ID=#{account_id}
+<select id="idCheck" parameterType="java.lang.String" resultType="java.lang.Integer">
+SELECT COUNT(ACCOUNT_ID) ACCOUNT_ID FROM ACCOUNT WHERE ACCOUNT_ID=#{account_id}
 </select>
 
 <!-- 로그인 -->
-<select id="getLogin" parameterType="java.util.Map" resultType="AccountDto">
+<select id="getLogin" parameterType="AccountDto" resultType="AccountDto">
 SELECT ACCOUNT_ID, ACCOUNT_PW, ACCOUNT_NAME, ACCOUNT_PHONE, ACCOUNT_EMAIL, ACCOUNT_CODE, ACCOUNT_POSITION, AUTH, ACCOUNT_DELFAG, ACCOUNT_REGDATE
 FROM ACCOUNT 
-WHERE ACCOUNT_ID=#{account_id} AND ACCOUNT_PW=#{account_pw} AND ACCOUNT_DELFAG='N'
+WHERE UPPER(ACCOUNT_ID)=UPPER(#{account_id}) AND ACCOUNT_PW=#{account_pw} AND ACCOUNT_DELFAG='N'
+</select>
+
+<!-- 암호화된 비밀번호 가져오기 -->
+<select id="selStringPw" parameterType="java.lang.String" resultType="java.lang.String">
+SELECT ACCOUNT_PW FROM ACCOUNT WHERE ACCOUNT_ID=#{account_id}
 </select>
 
 <!-- 비밀번호 찾기 -->
