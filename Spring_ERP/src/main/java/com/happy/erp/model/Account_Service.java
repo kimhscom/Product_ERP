@@ -44,6 +44,12 @@ public class Account_Service implements Account_IService {
 	}
 
 	@Override
+	public boolean changePw(Map<String, String> map) {
+		logger.info("비밀번호 변경 changePw {}", map);
+		return account_Interface.changePw(map);
+	}
+		
+	@Override
 	public Account_DTO detailAccount(String account_id) {
 		logger.info("사용자 상세조회 detailAccount {}", account_id);
 		return account_Interface.detailAccount(account_id);

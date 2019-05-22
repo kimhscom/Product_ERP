@@ -32,6 +32,13 @@ SET ACCOUNT_PW=#{temp_pw}
 WHERE ACCOUNT_ID=#{account_id} AND ACCOUNT_EMAIL=#{account_email}
 </update>
 
+<!-- 비밀번호 변경 -->
+<update id="changePw" parameterType="java.util.Map">
+UPDATE ACCOUNT 
+SET ACCOUNT_PW=#{change_pw}  
+WHERE ACCOUNT_ID=#{account_id} AND ACCOUNT_PW=#{account_pw} 
+</update>
+
 <!-- 사용자 상세조회 -->
 <select id="detailAccount" parameterType="java.lang.String" resultType="AccountDto">
 SELECT ACCOUNT_ID, ACCOUNT_PW, ACCOUNT_NAME, ACCOUNT_PHONE, ACCOUNT_EMAIL, ACCOUNT_CODE, ACCOUNT_POSITION, AUTH, ACCOUNT_DELFAG, ACCOUNT_REGDATE
@@ -49,7 +56,7 @@ FROM
 FROM ACCOUNT
 WHERE ACCOUNT_DELFAG='N' ORDER BY ACCOUNT_REGDATE DESC)
 )
-WHERE RNUM BETWEEN #{start} AND #{end}
+WHERE RNUM BETWEEN #{start} AND #{last}
 </select>
 
 <!-- 사용자 총 인원 조회 -->
@@ -60,7 +67,7 @@ SELECT COUNT(*) FROM ACCOUNT WHERE ACCOUNT_DELFAG='N'
 <!-- 사용자 정보 수정 -->
 <update id="modifyAccount" parameterType="java.util.Map">
 UPDATE ACCOUNT 
-SET ACCOUNT_PW=#{account_pw}, ACCOUNT_PHONE=#{account_phone}, ACCOUNT_EMAIL=#{account_email}, ACCOUNT_POSITION=#{account_position}
+SET ACCOUNT_PHONE=#{account_phone}, ACCOUNT_EMAIL=#{account_email}, ACCOUNT_POSITION=#{account_position}
 WHERE ACCOUNT_ID=#{account_id}
 </update>
 

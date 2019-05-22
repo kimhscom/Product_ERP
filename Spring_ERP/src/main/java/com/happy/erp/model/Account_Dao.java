@@ -56,10 +56,30 @@ public class Account_Dao implements Account_Interface {
 
 	@Override
 	public boolean findAccountPw(Map<String, String> map) {
+		String encodePw = passwordEncoder.encode(map.get("temp_pw"));
+		map.put("temp_pw", encodePw);
 		int n = sqlSession.update(NS+"findAccountPw", map);
 		return n>0? true:false;
 	}
 
+	@Override
+	public boolean changePw(Map<String, String> map) {
+		String securityPw = sqlSession.selectOne(NS+"selStringPw", map);
+		
+		if (passwordEncoder.matches(map.get("account_pw"), securityPw)) {
+			map.put("account_pw", securityPw);
+			System.out.println("비밀번호 일치");
+			String encodePw = passwordEncoder.encode(map.get("change_pw"));
+			map.put("change_pw", encodePw);
+			int n = sqlSession.update(NS+"changePw", map);
+			return n>0? true:false;
+		}else {
+			System.out.println("비밀번호 불일치");			
+		}
+		
+		return false;
+	}
+	
 	@Override
 	public Account_DTO detailAccount(String account_id) {
 		return sqlSession.selectOne(NS+"detailAccount", account_id);
@@ -92,5 +112,6 @@ public class Account_Dao implements Account_Interface {
 		int n = sqlSession.update(NS+"deleteAccount", account_id);
 		return n>0? true:false;
 	}
+
 
 }

@@ -19,6 +19,9 @@ public interface Account_IService {
 
 	// findAccountPw : 비밀번호 찾기
 	public boolean findAccountPw(Map<String, String> map);
+	
+	// changePw : 비밀번호 변경
+	public boolean changePw(Map<String, String> map);
 
 	// detailAccount : 사용자 상세조회
 	public Account_DTO detailAccount(String account_id);

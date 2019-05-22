@@ -42,7 +42,6 @@ public class AccountTest_Ctrl {
 		return null;
 	}
 	
-	// temp_pw(임시비밀번호) 암호화 필요!!!
 	@RequestMapping(value="/findAccountPw.do", method=RequestMethod.GET)
 	public String findAccountPw(HttpServletRequest request) {
 		String account_id = request.getParameter("account_id");
@@ -53,6 +52,20 @@ public class AccountTest_Ctrl {
 		map.put("account_email", account_email);
 		map.put("temp_pw", temp_pw);
 		boolean isc = service.findAccountPw(map);
+		System.out.println(isc+"$$$$$$$$$$$$$$$$$$$$");
+		return null;
+	}
+	
+	@RequestMapping(value="/changePw.do", method=RequestMethod.GET)
+	public String changePw(HttpServletRequest request) {
+		String account_id = request.getParameter("account_id");
+		String account_pw = request.getParameter("account_pw");
+		String change_pw = request.getParameter("change_pw");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("account_id", account_id);
+		map.put("account_pw", account_pw);
+		map.put("change_pw", change_pw);
+		boolean isc = service.changePw(map);
 		System.out.println(isc+"$$$$$$$$$$$$$$$$$$$$");
 		return null;
 	}
@@ -81,6 +94,41 @@ public class AccountTest_Ctrl {
 		List<Account_DTO> lists = service.accountList(pdto);
 		System.out.println(lists.size()+"$$$$$$$$$$$$$$$$$$$$");	
 		System.out.println(lists+"$$$$$$$$$$$$$$$$$$$$");						
+		return null;
+	}
+	
+	@RequestMapping(value="/modifyAccount.do", method=RequestMethod.GET)
+	public String modifyAccount(HttpServletRequest request) {
+		String account_id = request.getParameter("account_id");
+		String account_phone = request.getParameter("account_phone");
+		String account_email = request.getParameter("account_email");
+		String account_position = request.getParameter("account_position");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("account_id", account_id);
+		map.put("account_phone", account_phone);
+		map.put("account_email", account_email);
+		map.put("account_position", account_position);
+		boolean isc = service.modifyAccount(map);
+		System.out.println(isc+"$$$$$$$$$$$$$$$$$$$$");
+		return null;
+	}
+	
+	@RequestMapping(value="/changeAuth.do", method=RequestMethod.GET)
+	public String changeAuth(HttpServletRequest request) {
+		String account_id = request.getParameter("account_id");
+		String auth = request.getParameter("auth");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("account_id", account_id);
+		map.put("auth", auth);
+		boolean isc = service.changeAuth(map);
+		System.out.println(isc+"$$$$$$$$$$$$$$$$$$$$");
+		return null;
+	}
+	
+	@RequestMapping(value="/deleteAccount.do", method=RequestMethod.GET)
+	public String deleteAccount(String account_id) {
+		boolean isc = service.deleteAccount(account_id);
+		System.out.println(isc+"$$$$$$$$$$$$$$$$$$$$");
 		return null;
 	}
 	
