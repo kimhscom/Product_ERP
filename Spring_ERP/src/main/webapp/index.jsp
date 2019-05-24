@@ -18,6 +18,7 @@ account_id=mingee&account_pw=1111&account_name=조민지&account_phone=010-7777-
 account_email=mingee@gmail.com&account_code=100003&account_position=공정관리">
 사용자등록</a>
 <a href="./idCheck.do?account_id=kimhscom">사용자 중복 체크</a>
+<a href="./codeCheck.do?account_code=100001">사번 중복 체크</a>
 <a href="./getLogin.do?account_id=mingee&account_pw=1111">로그인</a>
 <a href="./findAccountPw.do?
 account_id=youngjae&temp_pw=4444&account_email=youngjae@gmail.com">

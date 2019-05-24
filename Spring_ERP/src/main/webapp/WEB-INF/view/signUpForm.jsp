@@ -14,58 +14,9 @@
 <script type="text/javascript" src="./js/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="./js/bootstrap.min.js"></script>
 <script type="text/javascript" src="./js/sweetalert.min.js"></script>
+<script type="text/javascript" src="./js/signUpForm.js"></script>
 <title>계정 등록</title>
 </head>
-<script type="text/javascript">
-function check() {
-	// pw 확인, id 중복
-	var account_pw = document.getElementById("account_pw").value;
-	var passOK = document.getElementById("passOK").value;
-	alert(account_pw+":"+passOK);
-}
-
-//id 중복 + 유효값 ajax
-	$(document).ready(function(){
-		$("#account_id").keyup(function(){
-			var inputLength = $(this).val().length;
-// 			alert(inputLength);
-			var account_id = $(this).val();
-			// 공백 유효값 검사
-			if(id.indexOf(" ") != -1){
-// 				alert("공백 있음");
-				$("#result").css("color","red");
-				$("#result").html("공백이 포함된 아이디는 사용이 불가 합니다.");
-				$("#chaVal").val("0"); // document.getElementById("chaVal").value = "0";
-			}else if(inputLength > 5){
-// 				alert("아작스 작동");
-				jQuery.ajax({
-					url : "./idCheck.do",
-					type : "post",
-					data : "account_id="+$(this).val(),
-					async : true,
-					success : function(msg) {
-// 						alert(msg);
-						$("#result").html(msg);
-						var temp = msg;
-						temp = temp.substring(0,temp.indexOf("디")+1);
-						if (temp == "사용가능한 아이디") {
-							$("#chaVal").val(1);
-							$("#result").css("color","blue");
-						}else{
-							$("#chaVal").val(0);
-							$("#result").css("color","red");
-						}
-					}
-				});
-			}else{
-				$("#result").css("color","red");
-				$("#result").html("6자리 이상만 사용가능합니다.");
-				$("#chaVal").val("0"); // document.getElementById("chaVal").value = "0";
-			}
-		});
-	});
-
-</script>
 <body>
 	<div id="container">
 		<div class="signup-form">
@@ -74,44 +25,44 @@ function check() {
 				<h2>계정 등록</h2>
 				<p>계정을 만들려면 이 양식을 입력하십시오!</p>
 				<hr>
-				<span id="result"></span>
 				<div class="form-group">
-					<label>*아이디</label>
-					<input type="text" class="form-control" id="account_id" name="account_id" required="required">
-					<span id="result"></span>
+					<label>*아이디(중복체크 / 영문과 숫자 포함 6자리이상 입력하세요)</label>
+					<input type="text" class="form-control" id="account_id" name="account_id" placeholder="아이디를 입력하세요" required="required">
+					<span id="result_id"></span>
 				</div>
 				<div class="form-group">
-					<label>*비밀번호</label>
-					<input type="password" class="form-control" id="account_pw" name="account_pw" required="required">
+					<label>*비밀번호(영문과 숫자, 특수문자 포함 최소 8자리에서 최대 12자리까지 입력하세요)</label>
+					<input type="password" class="form-control" id="account_pw" name="account_pw" placeholder="비밀번호를 입력하세요" maxlength="12" required="required">
+					<span id="result_pw"></span>
 				</div>
 				<div class="form-group">
 					<label>*비밀번호 확인</label>
-					<input type="password" class="form-control" name="passOK" required="required">
+					<input type="password" class="form-control" id="confirmPw" placeholder="비밀번호를 한번 더 입력하세요" required="required">
+					<span id="result_comfirm"></span>
 				</div>
 				<div class="form-group">
 					<label>*이름</label>
-					<input type="text" class="form-control" name="account_name" required="required">
+					<input type="text" class="form-control" id="account_name" name="account_name" placeholder="이름을 입력하세요" required="required">
+					<span id="result_name"></span>
 				</div>
 				<div class="form-group">
 					<label>*전화번호</label>
-					<input type="tel" class="form-control" name="account_phone" required="required">
+					<input type="text" class="form-control" id="account_phone" name="account_phone" placeholder="전화번호를 입력하세요" required="required">
+					<span id="result_phone"></span>
 				</div>
 				<div class="form-group">
 					<label>*이메일 주소</label>
-					<input type="email" class="form-control" name="account_email" required="required">
-				</div>
-				<div class="form-group">
-					<label>*사번</label>
-					<input type="text" class="form-control" name="account_code" required="required">
+					<input type="text" class="form-control" id="account_email" name="account_email" placeholder="이메일 주소를 입력하세요" required="required">
+					<span id="result_email"></span>
 				</div>
 				<div class="form-group"> 
 				  <label>*소속</label>
 				     <select name="account_position" class="form-control selectpicker">
-				      <option value="">당신의 소속을 선택하세요</option>
-				      <option>생산계획</option>
-				      <option>전산관리</option>
-				      <option>공정관리</option>
-				      <option>품질관리</option>				      
+				      <option value="">-- 부서를 선택하세요 --</option>
+				      <option value="생산계획">생산계획</option>
+				      <option value="전산관리">전산관리</option>
+				      <option value="공정관리">공정관리</option>
+				      <option value="품질관리">품질관리</option>				      
 				    </select>				 
 				</div>
 				<div class="form-group">

@@ -84,6 +84,21 @@ public class AccountController {
 		return (isc2==false)?"사용가능한 아이디 입니다.":"중복된 아이디 입니다.";
 	}
 	
+	// signUp.do
+	@RequestMapping(value="/signUp.do", method=RequestMethod.POST)
+	public String signUp(Account_DTO dto) {
+		boolean isc = account_IService.insertAccount(dto);
+		logger.info("Controller signUp {} // {}", isc, new Date());
+		return isc?"redirect:/loginForm.do":"redirect:/signUpForm.do";
+	}
+	
+	// findPwForm.do
+	@RequestMapping(value="/findPwForm.do", method=RequestMethod.GET)
+	public String findPwForm() {
+		logger.info("Controller findPwForm");
+		return "findPwForm";
+	}
+	
 	// mainPage.do
 	@RequestMapping(value="/mainPage.do", method=RequestMethod.GET)
 	public String mainPage(HttpSession session, Model model) {

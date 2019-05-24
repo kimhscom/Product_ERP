@@ -13,6 +13,11 @@ VALUES(#{account_id}, #{account_pw}, #{account_name}, #{account_phone}, #{accoun
 SELECT COUNT(ACCOUNT_ID) ACCOUNT_ID FROM ACCOUNT WHERE ACCOUNT_ID=#{account_id}
 </select>
 
+<!-- 사번 중복체크 -->
+<select id="codeCheck" parameterType="java.lang.String" resultType="java.lang.Integer">
+SELECT COUNT(ACCOUNT_CODE) ACCOUNT_CODE FROM ACCOUNT WHERE ACCOUNT_CODE=#{account_code}
+</select>
+
 <!-- 로그인 -->
 <select id="getLogin" parameterType="AccountDto" resultType="AccountDto">
 SELECT ACCOUNT_ID, ACCOUNT_PW, ACCOUNT_NAME, ACCOUNT_PHONE, ACCOUNT_EMAIL, ACCOUNT_CODE, ACCOUNT_POSITION, AUTH, ACCOUNT_DELFAG, ACCOUNT_REGDATE

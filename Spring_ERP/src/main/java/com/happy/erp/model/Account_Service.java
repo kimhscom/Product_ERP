@@ -32,6 +32,12 @@ public class Account_Service implements Account_IService {
 	}
 
 	@Override
+	public boolean codeCheck(String account_code) {
+		logger.info("사번 중복체크 codeCheck {}", account_code);
+		return account_Interface.codeCheck(account_code);
+	}
+	
+	@Override
 	public Account_DTO getLogin(Account_DTO dto) {
 		logger.info("로그인 getLogin {}", dto);
 		return account_Interface.getLogin(dto);
@@ -84,5 +90,6 @@ public class Account_Service implements Account_IService {
 		logger.info("사용자 삭제 deleteAccount {}", account_id);
 		return account_Interface.deleteAccount(account_id);
 	}
+
 
 }

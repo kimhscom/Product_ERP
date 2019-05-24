@@ -14,6 +14,9 @@ public interface Account_Interface {
 	// idCheck : 사용자 중복체크
 	public boolean idCheck(String account_id);
 	
+	// codeCheck : 사번 중복체크
+	public boolean codeCheck(String account_code);
+	
 	// getLogin : 로그인
 	public Account_DTO getLogin(Account_DTO dto);
 	

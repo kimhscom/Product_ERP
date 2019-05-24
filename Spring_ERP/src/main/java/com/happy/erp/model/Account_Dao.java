@@ -40,6 +40,12 @@ public class Account_Dao implements Account_Interface {
 	}
 
 	@Override
+	public boolean codeCheck(String account_code) {
+		int n = sqlSession.selectOne(NS+"codeCheck", account_code);
+		return n>0? true:false;
+	}
+	
+	@Override
 	public Account_DTO getLogin(Account_DTO dto) {
 		String securityPw = sqlSession.selectOne(NS+"selStringPw", dto);
 		
