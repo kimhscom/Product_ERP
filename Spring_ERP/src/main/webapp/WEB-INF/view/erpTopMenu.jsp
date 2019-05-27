@@ -24,7 +24,7 @@
 	    </div>
 	    <div class="collapse navbar-collapse" id="myNavbar">
 	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="#">홈</a></li>
+	        <li class="active"><a href="./mainPage.do">홈</a></li>
 	        <li class="dropdown">
 	          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
@@ -40,9 +40,10 @@
 	        <li class="nav-item dropdown">
 				<a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><span class="glyphicon glyphicon-user"></span>${acc.account_name}<b class="caret"></b></a>
 				<ul class="dropdown-menu">
-					<li><a href="#" class="dropdown-item"><span class="glyphicon glyphicon-briefcase">마이페이지</a></li>
+					<li><a href="./myPageForm.do" class="dropdown-item"><span class="glyphicon glyphicon-briefcase">마이페이지</a></li>
+					<li><a href="./changePwForm.do" class="dropdown-item"><span class="glyphicon glyphicon-lock">비밀번호변경</a></li>
 					<li class="divider dropdown-divider"></li>
-					<li><a href="./logOut.do" class="dropdown-item"><span class="glyphicon glyphicon-log-out"></span>로그아웃</a></li>
+					<li><a href="./logOut.do" class="dropdown-item"><span class="glyphicon glyphicon-off"></span>로그아웃</a></li>
 				</ul>
 			</li>
 	      </ul>

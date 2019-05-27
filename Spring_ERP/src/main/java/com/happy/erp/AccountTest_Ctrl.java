@@ -35,13 +35,6 @@ public class AccountTest_Ctrl {
 		return null;
 	}
 	
-	@RequestMapping(value="/codeCheck.do", method=RequestMethod.GET)
-	public String codeCheck(String account_code) {
-		boolean isc = service.codeCheck(account_code);
-		System.out.println(isc+"$$$$$$$$$$$$$$$$$$$$");
-		return null;
-	}
-	
 	@RequestMapping(value="/getLogin.do", method=RequestMethod.GET)
 	public String getLogin(Account_DTO dto) {
 		Account_DTO ldto = service.getLogin(dto);

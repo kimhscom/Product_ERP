@@ -48,24 +48,20 @@ $(document).ready(function(){
 //			alert("공백 있음");
 			$("#result_pw").css("color","red");
 			$("#result_pw").html("공백이 포함된 비밀번호는 사용이 불가 합니다.");
-			$("#chaVal").val("0");
 		}else if(pwLength > 7){
 //			alert("유효값 통과");
 			if (rePw.test(account_pw) == true) {
 //				alert("유효값 통과");
 				$("#result_pw").css("color","blue");
 				$("#result_pw").html("사용하실 수 있습니다.");
-				$("#chaVal").val("1");
 			}else{
 //				alert("유효값 실패");
 				$("#result_pw").css("color","red");
 				$("#result_pw").html("사용하실 수 없습니다.");
-				$("#chaVal").val("0");
 			}
 		}else{
 			$("#result_pw").css("color","red");
 			$("#result_pw").html("최소 8자리이상 사용가능합니다.");
-			$("#chaVal").val("0");
 		}
 	});
 	
@@ -78,12 +74,10 @@ $(document).ready(function(){
 //			alert("일치");
 			$("#result_comfirm").css("color","blue");
 			$("#result_comfirm").html("비밀번호 일치!");
-			$("#chaVal").val("1");
 		}else{
 //			alert("불일치");
 			$("#result_comfirm").css("color","red");
 			$("#result_comfirm").html("비밀번호 불일치!!!");
-			$("#chaVal").val("0");
 		}
 	});	
 
@@ -97,12 +91,10 @@ $(document).ready(function(){
 //			alert("값이 유효함");
 			$("#result_email").css("color","blue");
 			$("#result_email").html("이메일 주소가 유효합니다.");
-			$("#chaVal").val("1"); 
 		}else{
 //			alert("값이 유효하지 않음");
 			$("#result_email").css("color","red");
 			$("#result_email").html("이메일 주소가 유효하지 않습니다.");
-			$("#chaVal").val("0");
 		}
 	});
 
@@ -116,12 +108,10 @@ $(document).ready(function(){
 //			alert("값이 유효 함");
 			$("#result_phone").css("color","blue");
 			$("#result_phone").html("전화번호가 유효합니다.");
-			$("#chaVal").val("1"); 
 		}else{
 //			alert("값이 유효 하지않음");
 			$("#result_phone").css("color","red");
 			$("#result_phone").html("전화번호가 유효하지 않습니다.");
-			$("#chaVal").val("0");
 		}
 	});
 	
@@ -135,12 +125,10 @@ $(document).ready(function(){
 //			alert("값이 유효 함");
 			$("#result_name").css("color","blue");
 			$("#result_name").html("이름이 유효합니다.");
-			$("#chaVal").val("1");
 		}else{
 //			alert("값이 유효 하지않음");
 			$("#result_name").css("color","red");
 			$("#result_name").html("이름이 유효하지 않습니다.");
-			$("#chaVal").val("0");
 		}
 	});
 

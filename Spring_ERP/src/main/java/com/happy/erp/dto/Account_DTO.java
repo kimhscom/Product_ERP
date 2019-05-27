@@ -10,7 +10,7 @@ public class Account_DTO implements Serializable {
 	private String account_name;
 	private String account_phone;
 	private String account_email;
-	private int account_code;
+	private int empno;
 	private String account_position;
 	private String auth;
 	private String account_delfag;
@@ -21,7 +21,7 @@ public class Account_DTO implements Serializable {
 	}
 
 	public Account_DTO(String account_id, String account_pw, String account_name, String account_phone,
-			String account_email, int account_code, String account_position, String auth, String account_delfag,
+			String account_email, int empno, String account_position, String auth, String account_delfag,
 			String account_regdate) {
 		super();
 		this.account_id = account_id;
@@ -29,7 +29,7 @@ public class Account_DTO implements Serializable {
 		this.account_name = account_name;
 		this.account_phone = account_phone;
 		this.account_email = account_email;
-		this.account_code = account_code;
+		this.empno = empno;
 		this.account_position = account_position;
 		this.auth = auth;
 		this.account_delfag = account_delfag;
@@ -76,12 +76,12 @@ public class Account_DTO implements Serializable {
 		this.account_email = account_email;
 	}
 
-	public int getAccount_code() {
-		return account_code;
+	public int getEmpno() {
+		return empno;
 	}
 
-	public void setAccount_code(int account_code) {
-		this.account_code = account_code;
+	public void setEmpno(int empno) {
+		this.empno = empno;
 	}
 
 	public String getAccount_position() {
@@ -119,8 +119,8 @@ public class Account_DTO implements Serializable {
 	@Override
 	public String toString() {
 		return "Account_DTO [account_id=" + account_id + ", account_pw=" + account_pw + ", account_name=" + account_name
-				+ ", account_phone=" + account_phone + ", account_email=" + account_email + ", account_code="
-				+ account_code + ", account_position=" + account_position + ", auth=" + auth + ", account_delfag="
+				+ ", account_phone=" + account_phone + ", account_email=" + account_email + ", empno="
+				+ empno + ", account_position=" + account_position + ", auth=" + auth + ", account_delfag="
 				+ account_delfag + ", account_regdate=" + account_regdate + "]";
 	}
 

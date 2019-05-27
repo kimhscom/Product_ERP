@@ -30,12 +30,6 @@ public class Account_Service implements Account_IService {
 		logger.info("사용자 중복체크 idCheck {}", account_id);
 		return account_Interface.idCheck(account_id);
 	}
-
-	@Override
-	public boolean codeCheck(String account_code) {
-		logger.info("사번 중복체크 codeCheck {}", account_code);
-		return account_Interface.codeCheck(account_code);
-	}
 	
 	@Override
 	public Account_DTO getLogin(Account_DTO dto) {
