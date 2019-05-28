@@ -15,9 +15,6 @@
 <script type="text/javascript" src="./js/sweetalert.min.js"></script>
 <title>비밀번호 찾기 페이지</title>
 </head>
-<script type="text/javascript">
-
-</script>
 <body>
 <div id="container">
 	<div class="row">

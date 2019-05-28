@@ -37,7 +37,7 @@
 				</div>
 				<div class="form-group">
 					<label>*비밀번호 확인</label>
-					<input type="password" class="form-control" id="confirmPw" placeholder="비밀번호를 한번 더 입력하세요" required="required">
+					<input type="password" class="form-control" id="confirmPw" placeholder="비밀번호를 한번 더 입력하세요" maxlength="12" required="required">
 					<span id="result_comfirm"></span>
 				</div>
 				<div class="form-group">

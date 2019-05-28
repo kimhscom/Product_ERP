@@ -192,5 +192,22 @@ public class AccountController {
 		logger.info("Controller changePwForm");
 		return "changePwForm";
 	}
+	
+	// changePw.do
+	@RequestMapping(value="/changePw.do", method=RequestMethod.POST)
+	public String changePw(HttpServletRequest request) {
+		String account_id = request.getParameter("account_id");
+		String account_pw = request.getParameter("account_pw");
+		String change_pw = request.getParameter("change_pw");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("account_id", account_id);
+		map.put("account_pw", account_pw);
+		map.put("change_pw", change_pw);
+		
+		boolean isc = account_IService.changePw(map);
+		logger.info("Controller changePw {} // {}", isc, new Date());
+		return isc?"redirect:/logOut.do":"redirect:/changePwForm.do";
+	}
 
 }
