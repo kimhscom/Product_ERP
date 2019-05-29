@@ -54,17 +54,23 @@ public class Account_Service implements Account_IService {
 		logger.info("사용자 상세조회 detailAccount {}", account_id);
 		return account_Interface.detailAccount(account_id);
 	}
-
+	
 	@Override
-	public List<Account_DTO> accountList(Pagination dto) {
-		logger.info("사용자 전체조회(페이징) accountList {}", dto);
-		return account_Interface.accountList(dto);
+	public List<Account_DTO> accountList() {
+		logger.info("사용자 전체조회 accountList");
+		return account_Interface.accountList();
 	}
 
 	@Override
-	public int accountListRow() {
-		logger.info("사용자 총 인원 조회 accountListRow");
-		return account_Interface.accountListRow();
+	public List<Account_DTO> accountListRow(Pagination dto) {
+		logger.info("사용자 전체조회(페이징) accountListRow {}", dto);
+		return account_Interface.accountListRow(dto);
+	}
+
+	@Override
+	public int accountListTotal() {
+		logger.info("사용자 총 인원 조회 accountListTotal");
+		return account_Interface.accountListTotal();
 	}
 
 	@Override

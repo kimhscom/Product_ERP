@@ -26,11 +26,14 @@ public interface Account_IService {
 	// detailAccount : 사용자 상세조회
 	public Account_DTO detailAccount(String account_id);
 
+	// accountList : 사용자 전체조회
+	public List<Account_DTO> accountList();
+	
 	// accountList : 사용자 전체조회(페이징)
-	public List<Account_DTO> accountList(Pagination dto);
+	public List<Account_DTO> accountListRow(Pagination dto);
 
 	// accountListRow : 사용자 총 인원 조회
-	public int accountListRow();
+	public int accountListTotal();
 
 	// modifyAccount : 사용자 정보 수정
 	public boolean modifyAccount(Map<String, String> map);

@@ -3,6 +3,7 @@ package com.happy.erp;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -11,6 +12,8 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.happy.erp.dto.Account_DTO;
+import com.happy.erp.dto.Pagination;
 import com.happy.erp.model.Account_IService;
 
 @Controller
@@ -208,6 +212,111 @@ public class AccountController {
 		boolean isc = account_IService.changePw(map);
 		logger.info("Controller changePw {} // {}", isc, new Date());
 		return isc?"redirect:/logOut.do":"redirect:/changePwForm.do";
+	}
+	
+	// modifyAccountForm.do
+	@RequestMapping(value="/modifyAccountForm.do", method=RequestMethod.GET)
+	public String modifyAccountForm() {
+		logger.info("Controller modifyAccountForm");
+		return "modifyAccountForm";
+	}
+	
+	// modifyAccount.do
+	@RequestMapping(value="/modifyAccount.do", method=RequestMethod.POST)
+	public String modifyAccount(HttpServletRequest request) {
+		String account_id = request.getParameter("account_id");
+		String account_phone = request.getParameter("account_phone");
+		String account_email = request.getParameter("account_email");
+		String account_position = request.getParameter("account_position");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("account_id", account_id);
+		map.put("account_phone", account_phone);
+		map.put("account_email", account_email);
+		map.put("account_position", account_position);
+		
+		boolean isc = account_IService.modifyAccount(map);
+		logger.info("Controller modifyAccount {} // {}", isc, new Date());
+		return "redirect:/myPageForm.do";
+	}
+	
+	// deleteAccount.do
+	@RequestMapping(value="/deleteAccount.do", method=RequestMethod.POST)
+	public String deleteAccount(HttpServletRequest request) {
+		String account_id = request.getParameter("account_id");
+		
+		boolean isc = account_IService.deleteAccount(account_id);
+		logger.info("Controller deleteAccount {} // {}", isc, new Date());
+		return isc?"redirect:/logOut.do":"modifyAccountForm";
+	}
+	
+	// accountList.do
+	@RequestMapping(value="/accountList.do", method=RequestMethod.GET)
+	public String accountList(Model model) {
+		List<Account_DTO> lists = account_IService.accountList();
+		logger.info("Controller accountList");
+		model.addAttribute("lists", lists);
+		return "accountList";
+	}
+	
+	// paging.do
+	@RequestMapping(value="/paging.do", method=RequestMethod.POST, 
+			produces="application/text; charset=UTF-8")
+	@ResponseBody
+	public String paging(Model model, HttpSession session, Pagination pgDto) {
+		Account_DTO dto = (Account_DTO)session.getAttribute("acc");
+		logger.info("Controlle paging {}", (Account_DTO)session.getAttribute("acc"));
+		JSONObject json = null;
+		
+		if (dto.getAuth().trim().equalsIgnoreCase("S")) {
+			pgDto.setTotal(account_IService.accountListTotal());
+			// 사용자 조회 객체 -> JSON으로 담음
+			json = objectJson(account_IService.accountListRow(pgDto), pgDto, dto);
+		}
+		
+		session.removeAttribute("pg");
+		session.setAttribute("pg", pgDto);
+		logger.info("Controller paging {}", json.toString());
+		return json.toString();
+	}
+	
+	@SuppressWarnings("unchecked")
+	private JSONObject objectJson(List<Account_DTO> lists, Pagination pg, Account_DTO acc) {
+		JSONObject json = new JSONObject();
+		JSONArray jLists = new JSONArray();
+		JSONObject jList = null;
+		
+		for (Account_DTO dto : lists) {
+			jList = new JSONObject();
+			jList.put("account_id", dto.getAccount_id());
+			jList.put("account_pw", dto.getAccount_pw());
+			jList.put("account_name", dto.getAccount_name());
+			jList.put("account_phone", dto.getAccount_phone());
+			jList.put("account_email", dto.getAccount_email());
+			jList.put("empno", dto.getEmpno());
+			jList.put("account_position", dto.getAccount_position());
+			jList.put("auth", dto.getAuth());
+			jList.put("account_delfag", dto.getAccount_delfag());
+			jList.put("account_regdate", dto.getAccount_regdate());
+			jList.put("accid", acc.getAccount_id());
+			
+			jLists.add(jList);
+		}
+		
+		// 페이징
+		
+		jList = new JSONObject();
+		jList.put("pageList", pg.getPageList() );
+		jList.put("index", pg.getIndex());
+		jList.put("pageNum", pg.getPageNum());
+		jList.put("listNum", pg.getListNum());
+		jList.put("total", pg.getTotal());
+		jList.put("count", pg.getCount());
+		
+		json.put("lists", jLists);
+		json.put("pg", jList);
+		
+		return json;
 	}
 
 }

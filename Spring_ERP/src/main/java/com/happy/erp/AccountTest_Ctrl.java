@@ -77,25 +77,25 @@ public class AccountTest_Ctrl {
 		return null;
 	}
 	
-	@RequestMapping(value="/accountListRow.do", method=RequestMethod.GET)
-	public String accountListRow() {
-		int n = service.accountListRow();
+	@RequestMapping(value="/accountListTotal.do", method=RequestMethod.GET)
+	public String accountListTotal() {
+		int n = service.accountListTotal();
 		System.out.println(n+"$$$$$$$$$$$$$$$$$$$$");
 		return null;
 	}
 	
 	// class not found excepssion 문제 해결할 것
-	@RequestMapping(value="/accountList.do", method=RequestMethod.GET)
-	public String accountList() {
-		Pagination pdto = new Pagination();
-		int total = service.accountListRow();
-		pdto.setTotal(total);
-		
-		List<Account_DTO> lists = service.accountList(pdto);
-		System.out.println(lists.size()+"$$$$$$$$$$$$$$$$$$$$");	
-		System.out.println(lists+"$$$$$$$$$$$$$$$$$$$$");						
-		return null;
-	}
+//	@RequestMapping(value="/accountListRow.do", method=RequestMethod.GET)
+//	public String accountListRow() {
+//		Pagination pdto = new Pagination();
+//		int total = service.accountListTotal();
+//		pdto.setTotal(total);
+//		
+//		List<Account_DTO> lists = service.accountListRow(pdto);
+//		System.out.println(lists.size()+"$$$$$$$$$$$$$$$$$$$$");	
+//		System.out.println(lists+"$$$$$$$$$$$$$$$$$$$$");						
+//		return null;
+//	}
 	
 	@RequestMapping(value="/modifyAccount.do", method=RequestMethod.GET)
 	public String modifyAccount(HttpServletRequest request) {

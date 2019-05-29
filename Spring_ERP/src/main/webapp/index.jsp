@@ -27,8 +27,8 @@ account_id=youngjae&temp_pw=4444&account_email=youngjae@gmail.com">
 
 <hr>
 <a href="./detailAccount.do?account_id=kimhscom">사용자 상세조회</a>
-<a href="./accountListRow.do?">사용자 총 인원 조회</a>
-<a href="./accountList.do?">사용가능 전체조회(페이징)</a>
+<a href="./accountListTotal.do?">사용자 총 인원 조회</a>
+<a href="./accountListRow.do?">사용가능 전체조회(페이징)</a>
 <a href="./modifyAccount.do?
 account_id=youngjae&account_phone=010-2222-3333&account_email=youngjae@gmail.com&account_position=생산계획">
 사용자 정보 수정</a>

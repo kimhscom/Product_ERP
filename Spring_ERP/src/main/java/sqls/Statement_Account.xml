@@ -46,8 +46,15 @@ FROM ACCOUNT
 WHERE ACCOUNT_ID=#{account_id}
 </select>
 
+<!-- 사용가능 전체조회 -->
+<select id="accountList" resultType="AccountDto">
+SELECT ACCOUNT_ID, ACCOUNT_PW, ACCOUNT_NAME, ACCOUNT_PHONE, ACCOUNT_EMAIL, EMPNO, ACCOUNT_POSITION, AUTH, ACCOUNT_DELFAG, ACCOUNT_REGDATE
+FROM ACCOUNT
+ORDER BY ACCOUNT_REGDATE DESC
+</select>
+
 <!-- 사용가능 전체조회(페이징) -->
-<select id="accountList" parameterType="Pagination" resultType="AccountDto">
+<select id="accountListRow" parameterType="Pagination" resultType="AccountDto">
 SELECT ACCOUNT_ID, ACCOUNT_PW, ACCOUNT_NAME, ACCOUNT_PHONE, ACCOUNT_EMAIL, EMPNO, ACCOUNT_POSITION, AUTH, ACCOUNT_DELFAG, ACCOUNT_REGDATE
 FROM 
 (SELECT ROWNUM RNUM, ACCOUNT_ID, ACCOUNT_PW, ACCOUNT_NAME, ACCOUNT_PHONE, ACCOUNT_EMAIL, EMPNO, ACCOUNT_POSITION, AUTH, ACCOUNT_DELFAG, ACCOUNT_REGDATE
@@ -60,7 +67,7 @@ WHERE RNUM BETWEEN #{start} AND #{last}
 </select>
 
 <!-- 사용자 총 인원 조회 -->
-<select id="accountListRow" resultType="java.lang.Integer">
+<select id="accountListTotal" resultType="java.lang.Integer">
 SELECT COUNT(*) FROM ACCOUNT WHERE ACCOUNT_DELFAG='N'
 </select>
 

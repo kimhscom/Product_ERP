@@ -10,7 +10,6 @@
 <script type="text/javascript" src="./js/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="./js/bootstrap.min.js"></script>
 <script type="text/javascript" src="./js/sweetalert.min.js"></script>
-<script type="text/javascript" src="./js/changePwForm.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-inverse">
@@ -35,7 +34,16 @@
 	          </ul>
 	        </li>
 	        <li><a href="#">Page 2</a></li>
-	        <li><a href="#">Page 3</a></li>
+	        <c:if test="${fn:trim(acc.auth) eq 'S'}">
+	        	<li class="dropdown">
+		          <a class="dropdown-toggle" data-toggle="dropdown" href="#">사용자 관리 <span class="caret"></span></a>
+		          <ul class="dropdown-menu">
+		            <li><a href="./accountList.do">전체조회</a></li>
+		            <li><a href="#">권한수정</a></li>
+		          </ul>
+		        </li>
+	        </c:if>
+	        
 	      </ul>	     
 	      <ul class="nav navbar-nav navbar-right">
 	        <li class="nav-item dropdown">

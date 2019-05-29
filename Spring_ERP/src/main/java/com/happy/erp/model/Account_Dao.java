@@ -84,15 +84,20 @@ public class Account_Dao implements Account_Interface {
 	public Account_DTO detailAccount(String account_id) {
 		return sqlSession.selectOne(NS+"detailAccount", account_id);
 	}
-
+	
 	@Override
-	public List<Account_DTO> accountList(Pagination dto) {
-		return sqlSession.selectList(NS+"accountList", dto);
+	public List<Account_DTO> accountList() {
+		return sqlSession.selectList(NS+"accountList");
+	}
+	
+	@Override
+	public List<Account_DTO> accountListRow(Pagination dto) {
+		return sqlSession.selectList(NS+"accountListRow", dto);
 	}
 
 	@Override
-	public int accountListRow() {
-		return sqlSession.selectOne(NS+"accountListRow");
+	public int accountListTotal() {
+		return sqlSession.selectOne(NS+"accountListTotal");
 	}
 
 	@Override

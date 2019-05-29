@@ -10,6 +10,7 @@
 </head>
 <body>
 <%@include file="/WEB-INF/view/erpTopMenu.jsp" %>
+<script type="text/javascript" src="./js/changePwForm.js"></script>
 <div id="container">
 	<form method="post" name="frm">
 		<h2>비밀번호 변경</h2>
