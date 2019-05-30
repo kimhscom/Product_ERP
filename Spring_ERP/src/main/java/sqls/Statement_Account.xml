@@ -5,7 +5,7 @@
 <insert id="insertAccount" parameterType="AccountDto" >
 INSERT INTO ACCOUNT
 (ACCOUNT_ID, ACCOUNT_PW, ACCOUNT_NAME, ACCOUNT_PHONE, ACCOUNT_EMAIL, EMPNO, ACCOUNT_POSITION, AUTH, ACCOUNT_DELFAG, ACCOUNT_REGDATE)
-VALUES(#{account_id}, #{account_pw}, #{account_name}, #{account_phone}, #{account_email}, ACCOUNT_EMPNO.NEXTVAL, #{account_position}, 'U', 'N', SYSDATE)
+VALUES(#{account_id}, #{account_pw}, #{account_name}, #{account_phone}, #{account_email}, (SELECT MAX(EMPNO)+1 FROM ACCOUNT), #{account_position}, 'U', 'N', SYSDATE)
 </insert>
 
 <!-- 사용자 중복체크 -->
@@ -46,14 +46,14 @@ FROM ACCOUNT
 WHERE ACCOUNT_ID=#{account_id}
 </select>
 
-<!-- 사용가능 전체조회 -->
+<!-- 사용자 전체조회 -->
 <select id="accountList" resultType="AccountDto">
 SELECT ACCOUNT_ID, ACCOUNT_PW, ACCOUNT_NAME, ACCOUNT_PHONE, ACCOUNT_EMAIL, EMPNO, ACCOUNT_POSITION, AUTH, ACCOUNT_DELFAG, ACCOUNT_REGDATE
 FROM ACCOUNT
 ORDER BY ACCOUNT_REGDATE DESC
 </select>
 
-<!-- 사용가능 전체조회(페이징) -->
+<!-- 사용자 전체조회(페이징) -->
 <select id="accountListRow" parameterType="Pagination" resultType="AccountDto">
 SELECT ACCOUNT_ID, ACCOUNT_PW, ACCOUNT_NAME, ACCOUNT_PHONE, ACCOUNT_EMAIL, EMPNO, ACCOUNT_POSITION, AUTH, ACCOUNT_DELFAG, ACCOUNT_REGDATE
 FROM 
@@ -61,14 +61,14 @@ FROM
 FROM
 (SELECT ACCOUNT_ID, ACCOUNT_PW, ACCOUNT_NAME, ACCOUNT_PHONE, ACCOUNT_EMAIL, EMPNO, ACCOUNT_POSITION, AUTH, ACCOUNT_DELFAG, ACCOUNT_REGDATE
 FROM ACCOUNT
-WHERE ACCOUNT_DELFAG='N' ORDER BY ACCOUNT_REGDATE DESC)
+ORDER BY ACCOUNT_REGDATE DESC)
 )
 WHERE RNUM BETWEEN #{start} AND #{last}
 </select>
 
 <!-- 사용자 총 인원 조회 -->
 <select id="accountListTotal" resultType="java.lang.Integer">
-SELECT COUNT(*) FROM ACCOUNT WHERE ACCOUNT_DELFAG='N'
+SELECT COUNT(*) FROM ACCOUNT
 </select>
 
 <!-- 사용자 정보 수정 -->

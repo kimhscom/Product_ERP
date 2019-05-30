@@ -39,7 +39,7 @@
 		          <a class="dropdown-toggle" data-toggle="dropdown" href="#">사용자 관리 <span class="caret"></span></a>
 		          <ul class="dropdown-menu">
 		            <li><a href="./accountList.do">전체조회</a></li>
-		            <li><a href="#">권한수정</a></li>
+		            <li><a href="./changeAuthForm.do">권한변경</a></li>
 		          </ul>
 		        </li>
 	        </c:if>

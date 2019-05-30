@@ -6,16 +6,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>전체조회 페이지</title>
+<title>권한변경 페이지</title>
 </head>
 <body>
 <%@include file="/WEB-INF/view/erpTopMenu.jsp" %>
-<script type="text/javascript" src="./js/accountList.js"></script>
+<script type="text/javascript" src="./js/changeAuthForm.js"></script>
 <div class="container">
-<h2>전체조회</h2>
+<h2>권한변경</h2>
 <hr>
 <h3>총 사용자 수 : ${paging.total}명</h3>
-	<form action="./accountList.do" method="post" id="frmPaging">
+	<form action="#" method="post" id="frmPaging" name="frmPaging">
 		<table class="table table-bordered">
 			<tr>
 				<th>아이디</th>
@@ -23,30 +23,24 @@
 				<th>사번</th>
 				<th>부서</th>
 				<th>권한</th>
-				<th>삭제여부(Y/N)</th>
-				<th>등록일</th>
 			</tr>
 			
 			<c:forEach var="dto" items="${lists}">
 				<tr>
 					<td>
-					<a href="./detailAccount.do?account_id=${dto.account_id}">
+					<input type="hidden" name="account_id" value="${dto.account_id}">
 					${dto.account_id}
-					</a>
 					</td>					
 					<td>${dto.account_name}</td>
-					<td>${dto.empno}</td>					
+					<td>${dto.empno}</td>
 					<td>${dto.account_position}</td>
 					<td>
-					<c:if test="${dto.auth eq 'U'}">사용자</c:if>
-					<c:if test="${dto.auth eq 'A'}">관리자</c:if>
-					<c:if test="${dto.auth eq 'S'}">최고관리자</c:if>
-					</td>
-					<td>${dto.account_delfag}</td>					
-					<td>
-					<!-- String date -> date -> 형태 String date -->					
-					<fmt:parseDate var="Stringdate" value="${dto.account_regdate}" pattern="yyyy-MM-dd HH:mm:ss"/>
-					<fmt:formatDate value="${Stringdate}" pattern="yyyy.MM.dd"/>					
+						<select name="auth">
+							<option value="U" ${dto.auth eq 'U' ? 'selected="selected"':""}>사용자</option>
+							<option value="A" ${dto.auth eq 'A' ? 'selected="selected"':""}>관리자</option>
+							<option value="S" ${dto.auth eq 'S' ? 'selected="selected"':""}>최고관리자</option>
+						</select>
+						<button type="button" class="btn btn-success" >변경</button>					
 					</td>
 				</tr>
 			</c:forEach>

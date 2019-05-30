@@ -15,7 +15,7 @@ import com.happy.erp.dto.Account_DTO;
 import com.happy.erp.dto.Pagination;
 import com.happy.erp.model.Account_IService;
 
-@Controller
+//@Controller
 public class AccountTest_Ctrl {
 	
 	@Autowired
@@ -84,18 +84,17 @@ public class AccountTest_Ctrl {
 		return null;
 	}
 	
-	// class not found excepssion 문제 해결할 것
-//	@RequestMapping(value="/accountListRow.do", method=RequestMethod.GET)
-//	public String accountListRow() {
-//		Pagination pdto = new Pagination();
-//		int total = service.accountListTotal();
-//		pdto.setTotal(total);
-//		
-//		List<Account_DTO> lists = service.accountListRow(pdto);
-//		System.out.println(lists.size()+"$$$$$$$$$$$$$$$$$$$$");	
-//		System.out.println(lists+"$$$$$$$$$$$$$$$$$$$$");						
-//		return null;
-//	}
+	@RequestMapping(value="/accountListRow.do", method=RequestMethod.GET)
+	public String accountListRow() {
+		Pagination pdto = new Pagination();
+		int total = service.accountListTotal();
+		pdto.setTotal(total);
+		
+		List<Account_DTO> lists = service.accountListRow(pdto);
+		System.out.println(lists.size()+"$$$$$$$$$$$$$$$$$$$$");	
+		System.out.println(lists+"$$$$$$$$$$$$$$$$$$$$");						
+		return null;
+	}
 	
 	@RequestMapping(value="/modifyAccount.do", method=RequestMethod.GET)
 	public String modifyAccount(HttpServletRequest request) {

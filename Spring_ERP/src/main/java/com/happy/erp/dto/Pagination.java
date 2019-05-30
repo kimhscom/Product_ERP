@@ -12,10 +12,10 @@ public class Pagination implements Serializable {
 	private int total; // 리스트 총갯수
 	
 	{
-		pageList = 5;
+		pageList = 10;
 		index = 0;
 		pageNum = 1;
-		listNum = 5;
+		listNum = 10;
 	}
 
 	public Pagination() {

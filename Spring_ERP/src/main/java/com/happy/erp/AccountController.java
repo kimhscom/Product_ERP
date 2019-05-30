@@ -251,12 +251,64 @@ public class AccountController {
 	}
 	
 	// accountList.do
-	@RequestMapping(value="/accountList.do", method=RequestMethod.GET)
-	public String accountList(Model model) {
-		List<Account_DTO> lists = account_IService.accountList();
+	@RequestMapping(value="/accountList.do", method={RequestMethod.GET,RequestMethod.POST})
+	public String accountList(Pagination paging, Model model) {
 		logger.info("Controller accountList");
+		logger.info("페이징 시작하는 곳 {}", new Date());
+		logger.info("전송받은 Pagination 값 : "+paging);
+		
+		List<Account_DTO> lists = account_IService.accountListRow(paging);
+		paging.setTotal(account_IService.accountListTotal());
+		
 		model.addAttribute("lists", lists);
+		model.addAttribute("paging", paging);
+		logger.info("=========================================페이징 Pagination 값"+paging);
+		
 		return "accountList";
+	}
+	
+	// detailAccount.do
+	@RequestMapping(value="/detailAccount.do", method=RequestMethod.GET)
+	public String detailAccount(HttpServletRequest request, Model model) {
+		String account_id = request.getParameter("account_id");
+		
+		Account_DTO dto = account_IService.detailAccount(account_id);
+		
+		model.addAttribute("dto", dto);
+		logger.info("Controller detailAccount {} // {}", dto, new Date());
+		return "detailAccount";
+	}
+	
+	// changeAuthForm.do
+	@RequestMapping(value="/changeAuthForm.do", method={RequestMethod.GET,RequestMethod.POST})
+	public String changeAuthForm(Pagination paging, Model model) {
+		logger.info("Controller changeAuthForm");
+		logger.info("페이징 시작하는 곳 {}", new Date());
+		logger.info("전송받은 Pagination 값 : "+paging);
+		
+		List<Account_DTO> lists = account_IService.accountListRow(paging);
+		paging.setTotal(account_IService.accountListTotal());
+		
+		model.addAttribute("lists", lists);
+		model.addAttribute("paging", paging);
+		logger.info("=========================================페이징 Pagination 값"+paging);
+		
+		return "changeAuthForm";
+	}
+	
+	// changeAuth.do
+	@RequestMapping(value="./changeAuth.do", method=RequestMethod.POST)
+	public String changeAuth(HttpServletRequest request) {
+		String account_id = request.getParameter("account_id");
+		String auth = request.getParameter("auth");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("account_id", account_id);
+		map.put("auth", auth);
+		
+		boolean isc = account_IService.changeAuth(map);
+		logger.info("Controller modifyAccount {} // {}", isc, new Date());
+		return "redirect:/changeAuthForm.do";
 	}
 	
 	// paging.do
