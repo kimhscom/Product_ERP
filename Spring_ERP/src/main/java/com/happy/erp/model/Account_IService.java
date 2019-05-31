@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.happy.erp.dto.Account_DTO;
 import com.happy.erp.dto.Pagination;
+import com.happy.erp.dto.SearchPagination;
 
 public interface Account_IService {
 	
@@ -34,6 +35,12 @@ public interface Account_IService {
 
 	// accountListRow : 사용자 총 인원 조회
 	public int accountListTotal();
+	
+	// accountSearchListRow : 사용자 조건검색 조회(페이징)
+	public List<Account_DTO> accountSearchListRow(SearchPagination dto);
+		
+	// accountSearchListTotal : 사용자 조건검색 총 인원 조회
+	public int accountSearchListTotal(SearchPagination dto);
 
 	// modifyAccount : 사용자 정보 수정
 	public boolean modifyAccount(Map<String, String> map);

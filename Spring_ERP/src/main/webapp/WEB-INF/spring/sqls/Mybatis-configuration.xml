@@ -4,6 +4,7 @@
 	<typeAliases>
 		<typeAlias type="com.happy.erp.dto.Account_DTO" alias="AccountDto"/>
 		<typeAlias type="com.happy.erp.dto.Pagination" alias="Pagination"/>
+		<typeAlias type="com.happy.erp.dto.SearchPagination" alias="Search"/>
 	</typeAliases>
 	
 	<mappers>

@@ -10,12 +10,12 @@
 </head>
 <body>
 <%@include file="/WEB-INF/view/erpTopMenu.jsp" %>
-<script type="text/javascript" src="./js/accountList.js"></script>
+<script type="text/javascript" src="./js/accountSearchList.js"></script>
 <div class="container">
 <h2>전체조회</h2>
 <hr>
 <h3>총 사용자 수 : ${paging.total}명</h3>
-	<form action="./accountList.do" method="post" id="frmPaging">
+	<form action="./accountSearchList.do" method="post" id="frmPaging">
 		<table class="table table-bordered">
 			<tr>
 				<th>아이디</th>

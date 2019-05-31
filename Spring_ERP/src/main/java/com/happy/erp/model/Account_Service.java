@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.happy.erp.dto.Account_DTO;
 import com.happy.erp.dto.Pagination;
+import com.happy.erp.dto.SearchPagination;
 
 @Service
 public class Account_Service implements Account_IService {
@@ -73,6 +74,18 @@ public class Account_Service implements Account_IService {
 		return account_Interface.accountListTotal();
 	}
 
+	@Override
+	public List<Account_DTO> accountSearchListRow(SearchPagination dto) {
+		logger.info("사용자 조건검색 조회(페이징) accountSearchListRow {}", dto);
+		return account_Interface.accountSearchListRow(dto);
+	}
+	
+	@Override
+	public int accountSearchListTotal(SearchPagination dto) {
+		logger.info("사용자 조건검색 총 인원 조회 accountSearchListTotal {}", dto);
+		return account_Interface.accountSearchListTotal(dto);
+	}
+	
 	@Override
 	public boolean modifyAccount(Map<String, String> map) {
 		logger.info("사용자 정보 수정 modifyAccount {}", map);

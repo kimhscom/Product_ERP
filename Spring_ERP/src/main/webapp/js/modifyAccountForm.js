@@ -7,9 +7,9 @@ $(document).ready(function(){
 	});
 	
 	// 취소
-	$(".btn-warning").click(function() {
-		location.href = "./myPageForm.do";
-	});
+//	$(".btn-warning").click(function() {
+//		location.href = "javascript:history.back(-1)";
+//	});
 	
 	// 탈퇴
 	$(".btn-danger").click(function() {

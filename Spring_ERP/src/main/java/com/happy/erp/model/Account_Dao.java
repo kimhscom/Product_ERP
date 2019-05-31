@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.happy.erp.dto.Account_DTO;
 import com.happy.erp.dto.Pagination;
+import com.happy.erp.dto.SearchPagination;
 
 @Repository
 public class Account_Dao implements Account_Interface {
@@ -101,6 +102,16 @@ public class Account_Dao implements Account_Interface {
 	}
 
 	@Override
+	public List<Account_DTO> accountSearchListRow(SearchPagination dto) {
+		return sqlSession.selectList(NS+"accountSearchListRow", dto);
+	}
+	
+	@Override
+	public int accountSearchListTotal(SearchPagination dto) {
+		return sqlSession.selectOne(NS+"accountSearchListTotal", dto);
+	}
+	
+	@Override
 	public boolean modifyAccount(Map<String, String> map) {
 		int n = sqlSession.update(NS+"modifyAccount", map);
 		return n>0? true:false;
@@ -116,7 +127,6 @@ public class Account_Dao implements Account_Interface {
 	public boolean deleteAccount(String account_id) {
 		int n = sqlSession.update(NS+"deleteAccount", account_id);
 		return n>0? true:false;
-	}
-
+	}	
 
 }

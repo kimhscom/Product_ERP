@@ -61,7 +61,7 @@ $(document).ready(function(){
 			}else if(change_pw != passOK){
 				alert("비밀번호 변경 오류!!! 비밀번호를 확인하십시오.");				
 			}else{
-				alert("비밀번호를 변경하였습니다.");
+				alert("비밀번호를 변경하였습니다. 로그아웃 합니다.");
 				document.frm.action = "./changePw.do";
 				document.frm.submit();
 			}

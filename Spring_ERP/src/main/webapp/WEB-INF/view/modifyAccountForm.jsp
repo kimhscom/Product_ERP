@@ -17,38 +17,36 @@
 		<hr>
 		<div class="form-group">
 			<label>아이디</label>
-			<input type="text" class="form-control" name="account_id" value="${acc.account_id}" readonly="readonly">		
+			<input type="text" class="form-control" name="account_id" value="${dto.account_id}" readonly="readonly">		
 		</div>
 		<div class="form-group">
 			<label>이름</label>
-			<input type="text" class="form-control" name="account_name" value="${acc.account_name}" readonly="readonly">		
+			<input type="text" class="form-control" name="account_name" value="${dto.account_name}" readonly="readonly">		
 		</div>
 		<div class="form-group">
 			<label>*전화번호</label>
-			<input type="text" class="form-control" name="account_phone" value="${acc.account_phone}">		
+			<input type="text" class="form-control" name="account_phone" value="${dto.account_phone}">		
 		</div>
 		<div class="form-group">
 			<label>*이메일</label>
-			<input type="text" class="form-control" name="account_email" value="${acc.account_email}">		
+			<input type="text" class="form-control" name="account_email" value="${dto.account_email}">		
 		</div>
 		<div class="form-group">
 			<label>사번</label>
-			<input type="text" class="form-control" name="empno" value="${acc.empno}" readonly="readonly">		
+			<input type="text" class="form-control" name="empno" value="${dto.empno}" readonly="readonly">		
 		</div>
 		<div class="form-group">
 			<label>*부서</label>
 			 <select name="account_position" class="form-control selectpicker">
-			 	<option value="${acc.account_position}">${acc.account_position}</option>
-			 	<option value="">-- 부서를 선택하세요 --</option>
-				<option value="생산계획">생산계획</option>
-				<option value="전산관리">전산관리</option>
-				<option value="공정관리">공정관리</option>
-				<option value="품질관리">품질관리</option>				      
+				<option value="생산계획" ${dto.account_position eq '생산계획' ? 'selected="selected"':""}>생산계획</option>
+				<option value="전산관리" ${dto.account_position eq '전산관리' ? 'selected="selected"':""}>전산관리</option>
+				<option value="공정관리" ${dto.account_position eq '공정관리' ? 'selected="selected"':""}>공정관리</option>
+				<option value="품질관리" ${dto.account_position eq '품질관리' ? 'selected="selected"':""}>품질관리</option>				      
 			 </select>		
 		</div>
 		<div class="box-footer">
 			<button type="button" class="btn btn-primary">저장</button>
-			<button type="button" class="btn btn-warning">취소</button>
+			<button type="button" class="btn btn-warning" onclick="location.href='./myPageForm.do?account_id=${dto.account_id}'">취소</button>
 			<span class="pull-right"><button type="button" class="btn btn-danger">탈퇴</button></span>		
 		</div>
 	</div>

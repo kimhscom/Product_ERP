@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.happy.erp.dto.Account_DTO;
 import com.happy.erp.dto.Pagination;
+import com.happy.erp.dto.SearchPagination;
 import com.happy.erp.model.Account_IService;
 
 @Controller
@@ -185,8 +186,11 @@ public class AccountController {
 	
 	// myPageForm.do
 	@RequestMapping(value="/myPageForm.do", method=RequestMethod.GET)
-	public String myPageForm() {
-		logger.info("Controller myPageForm");
+	public String myPageForm(String account_id, Model model) {
+		Account_DTO dto = account_IService.detailAccount(account_id);
+		
+		model.addAttribute("dto", dto);
+		logger.info("Controller myPageForm {} // {}", dto, new Date());
 		return "myPageForm";
 	}
 	
@@ -216,14 +220,17 @@ public class AccountController {
 	
 	// modifyAccountForm.do
 	@RequestMapping(value="/modifyAccountForm.do", method=RequestMethod.GET)
-	public String modifyAccountForm() {
-		logger.info("Controller modifyAccountForm");
+	public String modifyAccountForm(String account_id, Model model) {
+		Account_DTO dto = account_IService.detailAccount(account_id);
+		
+		model.addAttribute("dto", dto);
+		logger.info("Controller modifyAccountForm {} // {}", dto, new Date());
 		return "modifyAccountForm";
 	}
 	
 	// modifyAccount.do
 	@RequestMapping(value="/modifyAccount.do", method=RequestMethod.POST)
-	public String modifyAccount(HttpServletRequest request) {
+	public String modifyAccount(HttpServletRequest request, Model model) {
 		String account_id = request.getParameter("account_id");
 		String account_phone = request.getParameter("account_phone");
 		String account_email = request.getParameter("account_email");
@@ -237,7 +244,13 @@ public class AccountController {
 		
 		boolean isc = account_IService.modifyAccount(map);
 		logger.info("Controller modifyAccount {} // {}", isc, new Date());
-		return "redirect:/myPageForm.do";
+		
+		Account_DTO dto = account_IService.detailAccount(account_id);
+		
+		model.addAttribute("dto", dto);
+		logger.info("Controller modifyAccountForm {} // {}", dto, new Date());
+		
+		return "myPageForm";
 	}
 	
 	// deleteAccount.do
@@ -265,6 +278,23 @@ public class AccountController {
 		logger.info("=========================================페이징 Pagination 값"+paging);
 		
 		return "accountList";
+	}
+	
+	// accountSearchList.do
+	@RequestMapping(value="/accountSearchList.do", method={RequestMethod.GET,RequestMethod.POST})
+	public String accountSearchList(SearchPagination paging, Model model) {
+		logger.info("Controller accountSearchList");
+		logger.info("페이징 시작하는 곳 {}", new Date());
+		logger.info("전송받은 SearchPagination 값 : "+paging);
+		
+		List<Account_DTO> lists = account_IService.accountSearchListRow(paging);
+		paging.setTotal(account_IService.accountSearchListTotal(paging));
+		
+		model.addAttribute("lists", lists);
+		model.addAttribute("paging", paging);
+		logger.info("=========================================페이징 SearchPagination 값"+paging);
+		
+		return "accountSearchList";
 	}
 	
 	// detailAccount.do
@@ -297,7 +327,7 @@ public class AccountController {
 	}
 	
 	// changeAuth.do
-	@RequestMapping(value="./changeAuth.do", method=RequestMethod.POST)
+	@RequestMapping(value="/changeAuth.do", method=RequestMethod.POST)
 	public String changeAuth(HttpServletRequest request) {
 		String account_id = request.getParameter("account_id");
 		String auth = request.getParameter("auth");
@@ -308,7 +338,7 @@ public class AccountController {
 		
 		boolean isc = account_IService.changeAuth(map);
 		logger.info("Controller modifyAccount {} // {}", isc, new Date());
-		return "redirect:/changeAuthForm.do";
+		return "redirect:/accountList.do";
 	}
 	
 	// paging.do

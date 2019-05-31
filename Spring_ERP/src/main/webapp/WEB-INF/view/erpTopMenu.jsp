@@ -39,7 +39,7 @@
 		          <a class="dropdown-toggle" data-toggle="dropdown" href="#">사용자 관리 <span class="caret"></span></a>
 		          <ul class="dropdown-menu">
 		            <li><a href="./accountList.do">전체조회</a></li>
-		            <li><a href="./changeAuthForm.do">권한변경</a></li>
+		            <li><a href="./accountSearchList.do">검색조회</a></li>
 		          </ul>
 		        </li>
 	        </c:if>
@@ -49,7 +49,7 @@
 	        <li class="nav-item dropdown">
 				<a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><span class="glyphicon glyphicon-user"></span>${acc.account_name}<b class="caret"></b></a>
 				<ul class="dropdown-menu">
-					<li><a href="./myPageForm.do" class="dropdown-item"><span class="glyphicon glyphicon-briefcase">마이페이지</a></li>
+					<li><a href="./myPageForm.do?account_id=${acc.account_id}" class="dropdown-item"><span class="glyphicon glyphicon-briefcase">마이페이지</a></li>
 					<li><a href="./changePwForm.do" class="dropdown-item"><span class="glyphicon glyphicon-lock">비밀번호변경</a></li>
 					<li class="divider dropdown-divider"></li>
 					<li><a href="./logOut.do" class="dropdown-item"><span class="glyphicon glyphicon-off"></span>로그아웃</a></li>
