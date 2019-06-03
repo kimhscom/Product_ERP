@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.happy.erp.dto.Account_DTO;
 import com.happy.erp.dto.Pagination;
-import com.happy.erp.dto.SearchPagination;
 import com.happy.erp.model.Account_IService;
 
 @Controller
@@ -281,18 +280,18 @@ public class AccountController {
 	}
 	
 	// accountSearchList.do
-	@RequestMapping(value="/accountSearchList.do", method={RequestMethod.GET,RequestMethod.POST})
-	public String accountSearchList(SearchPagination paging, Model model) {
+	@RequestMapping(value="/accountSearchList.do", method=RequestMethod.GET)
+	public String accountSearchList(Pagination paging, Model model) {
 		logger.info("Controller accountSearchList");
 		logger.info("페이징 시작하는 곳 {}", new Date());
-		logger.info("전송받은 SearchPagination 값 : "+paging);
+		logger.info("전송받은 Pagination 값 : "+paging);
 		
 		List<Account_DTO> lists = account_IService.accountSearchListRow(paging);
 		paging.setTotal(account_IService.accountSearchListTotal(paging));
 		
 		model.addAttribute("lists", lists);
 		model.addAttribute("paging", paging);
-		logger.info("=========================================페이징 SearchPagination 값"+paging);
+		logger.info("=========================================페이징 Pagination 값"+paging);
 		
 		return "accountSearchList";
 	}

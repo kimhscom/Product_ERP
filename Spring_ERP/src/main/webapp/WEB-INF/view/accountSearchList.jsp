@@ -6,16 +6,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>전체조회 페이지</title>
+<title>검색조건 조회 페이지</title>
 </head>
 <body>
 <%@include file="/WEB-INF/view/erpTopMenu.jsp" %>
 <script type="text/javascript" src="./js/accountSearchList.js"></script>
 <div class="container">
-<h2>전체조회</h2>
+<h2>검색조건 조회</h2>
 <hr>
 <h3>총 사용자 수 : ${paging.total}명</h3>
-	<form action="./accountSearchList.do" method="post" id="frmPaging">
+	<form action="./accountSearchList.do" method="get" id="frmPaging">
 		<table class="table table-bordered">
 			<tr>
 				<th>아이디</th>
@@ -72,8 +72,23 @@
 				<!-- 마지막 페이지 이동 -->
 				<li><a href="#" onclick="pageLast(${paging.pageNum},${paging.total},${paging.listNum},${paging.pageList})">&raquo;</a></li>
 			</ul>		
+		</div>
+		
+		<!-- 검색 기능 -->
+		<div class="text-center">
+			<select name="searchType">
+				<option value="ACCOUNT_ID" <c:out value="${paging.searchType eq 'ACCOUNT_ID'?'selected':''}"/>>아이디</option>
+				<option value="ACCOUNT_NAME" <c:out value="${paging.searchType eq 'ACCOUNT_NAME'?'selected':''}"/>>이름</option>
+				<option value="EMPNO" <c:out value="${paging.searchType eq 'EMPNO'?'selected':''}"/>>사번</option>
+			</select>
+			<input type="text" name="keyword" value="${paging.keyword}">
+			<button type="submit">검색</button>
 		</div>		
 	</form>	
 </div>
+${paging.index}
+${paging.pageNum}
+${paging.listNum}
+${paging.total}
 </body>
 </html>

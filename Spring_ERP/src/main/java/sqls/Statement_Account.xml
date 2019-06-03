@@ -72,37 +72,29 @@ SELECT COUNT(*) FROM ACCOUNT
 </select>
 
 <!-- 사용자 조건검색 조회(페이징) -->
-<select id="accountSearchListRow" parameterType="Search" resultType="AccountDto">
+<select id="accountSearchListRow" parameterType="Pagination" resultType="AccountDto">
 SELECT ACCOUNT_ID, ACCOUNT_PW, ACCOUNT_NAME, ACCOUNT_PHONE, ACCOUNT_EMAIL, EMPNO, ACCOUNT_POSITION, AUTH, ACCOUNT_DELFAG, ACCOUNT_REGDATE
 FROM 
 (SELECT ROWNUM RNUM, ACCOUNT_ID, ACCOUNT_PW, ACCOUNT_NAME, ACCOUNT_PHONE, ACCOUNT_EMAIL, EMPNO, ACCOUNT_POSITION, AUTH, ACCOUNT_DELFAG, ACCOUNT_REGDATE
 FROM
 (SELECT ACCOUNT_ID, ACCOUNT_PW, ACCOUNT_NAME, ACCOUNT_PHONE, ACCOUNT_EMAIL, EMPNO, ACCOUNT_POSITION, AUTH, ACCOUNT_DELFAG, ACCOUNT_REGDATE
 FROM ACCOUNT
-WHERE <include refid="search"/>
+<include refid="search"/>
 ORDER BY ACCOUNT_REGDATE DESC)
 )
 WHERE RNUM BETWEEN #{start} AND #{last}
 </select>
 
 <!-- 사용자 조건검색 총 인원 조회 -->
-<select id="accountSearchListTotal" parameterType="Search" resultType="java.lang.Integer">
+<select id="accountSearchListTotal" parameterType="Pagination" resultType="java.lang.Integer">
 SELECT COUNT(*) FROM ACCOUNT
-WHERE <include refid="search"/>
+<include refid="search"></include>
 </select>
 
 <!-- include 조건 -->
 <sql id="search">
-	<if test="searchType != null">
-		<if test="searchType == 'i'.toString()">
-			ACCOUNT_ID LIKE '%' || #{keyword} || '%'
-		</if>
-		<if test="searchType == 'n'.toString()">
-			ACCOUNT_NAME LIKE '%' || #{keyword} || '%'
-		</if>
-		<if test="searchType == 'e'.toString()">
-			EMPNO LIKE '%' || #{keyword} || '%'
-		</if>		
+	<if test="searchType != null and searchType != ''">
+		WHERE #{searchType} LIKE '%' || #{keyword} || '%'			
 	</if>
 </sql>
 

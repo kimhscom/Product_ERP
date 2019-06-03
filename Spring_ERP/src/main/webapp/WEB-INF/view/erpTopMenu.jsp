@@ -26,11 +26,10 @@
 	      <ul class="nav navbar-nav">
 	        <li class="active"><a href="./mainPage.do">홈</a></li>
 	        <li class="dropdown">
-	          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+	          <a class="dropdown-toggle" data-toggle="dropdown" href="#">품목/재고 <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
-	            <li><a href="#">Page 1-1</a></li>
-	            <li><a href="#">Page 1-2</a></li>
-	            <li><a href="#">Page 1-3</a></li>
+	            <li><a href="#">품목관리</a></li>
+	            <li><a href="#">재고관리</a></li>
 	          </ul>
 	        </li>
 	        <li><a href="#">Page 2</a></li>

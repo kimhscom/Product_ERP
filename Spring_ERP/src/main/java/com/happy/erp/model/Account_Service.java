@@ -1,3 +1,4 @@
+
 package com.happy.erp.model;
 
 import java.util.List;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.happy.erp.dto.Account_DTO;
 import com.happy.erp.dto.Pagination;
-import com.happy.erp.dto.SearchPagination;
 
 @Service
 public class Account_Service implements Account_IService {
@@ -75,13 +75,13 @@ public class Account_Service implements Account_IService {
 	}
 
 	@Override
-	public List<Account_DTO> accountSearchListRow(SearchPagination dto) {
+	public List<Account_DTO> accountSearchListRow(Pagination dto) {
 		logger.info("사용자 조건검색 조회(페이징) accountSearchListRow {}", dto);
 		return account_Interface.accountSearchListRow(dto);
 	}
 	
 	@Override
-	public int accountSearchListTotal(SearchPagination dto) {
+	public int accountSearchListTotal(Pagination dto) {
 		logger.info("사용자 조건검색 총 인원 조회 accountSearchListTotal {}", dto);
 		return account_Interface.accountSearchListTotal(dto);
 	}

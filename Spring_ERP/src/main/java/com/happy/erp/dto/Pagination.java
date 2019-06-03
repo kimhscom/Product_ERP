@@ -10,6 +10,8 @@ public class Pagination implements Serializable {
 	private int pageNum; // 출력할 페이지 시작번호
 	private int listNum; // 출력할 리스트 갯수
 	private int total; // 리스트 총갯수
+	private String searchType; // 검색타입
+	private String keyword; // 키워드
 	
 	{
 		pageList = 10;
@@ -105,13 +107,29 @@ public class Pagination implements Serializable {
 
 	public void setTotal(int total) {
 		this.total = total;
+	}	
+
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 
 	@Override
 	public String toString() {
 		return "Pagination [pageList=" + pageList + ", index=" + index + ", pageNum=" + pageNum + ", listNum=" + listNum
-				+ ", total=" + total + "]";
-	}
+				+ ", total=" + total + ", searchType=" + searchType + ", keyword=" + keyword + "]";
+	}	
 		
 
 }

@@ -45,9 +45,9 @@
 	<mvc:interceptors>
 	
 		<mvc:interceptor>
-		<mvc:mapping path="/boardWriteForm.do"/>
-		<mvc:mapping path="/mail.do"/>
-		<mvc:mapping path="/memberList.do"/>
+		<mvc:mapping path="/mainPage.do"/>
+		<mvc:mapping path="/myPageForm.do"/>
+		<mvc:mapping path="/accountList.do"/>
 		<bean class="com.happy.erp.interceptor.Interceptor"/>
 		</mvc:interceptor>
 		<!-- spring에서 뒤로가기를 막기위해 캐쉬를 삭제해줌 -->	

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import com.happy.erp.dto.Account_DTO;
 import com.happy.erp.dto.Pagination;
-import com.happy.erp.dto.SearchPagination;
 
 @Repository
 public class Account_Dao implements Account_Interface {
@@ -102,12 +101,12 @@ public class Account_Dao implements Account_Interface {
 	}
 
 	@Override
-	public List<Account_DTO> accountSearchListRow(SearchPagination dto) {
+	public List<Account_DTO> accountSearchListRow(Pagination dto) {
 		return sqlSession.selectList(NS+"accountSearchListRow", dto);
 	}
 	
 	@Override
-	public int accountSearchListTotal(SearchPagination dto) {
+	public int accountSearchListTotal(Pagination dto) {
 		return sqlSession.selectOne(NS+"accountSearchListTotal", dto);
 	}
 	
