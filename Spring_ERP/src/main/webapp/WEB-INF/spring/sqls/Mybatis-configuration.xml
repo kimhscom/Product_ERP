@@ -4,10 +4,12 @@
 	<typeAliases>
 		<typeAlias type="com.happy.erp.dto.Account_DTO" alias="AccountDto"/>
 		<typeAlias type="com.happy.erp.dto.Pagination" alias="Pagination"/>
+		<typeAlias type="com.happy.erp.dto.Item_DTO" alias="ItemDto"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="/sqls/Statement_Account.xml"/>
+		<mapper resource="/sqls/Statement_Item.xml"/>
 	</mappers>
 	
 </configuration>

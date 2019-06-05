@@ -28,7 +28,7 @@
 	        <li class="dropdown">
 	          <a class="dropdown-toggle" data-toggle="dropdown" href="#">품목/재고 <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
-	            <li><a href="#">품목관리</a></li>
+	            <li><a href="./itemList.do">품목관리</a></li>
 	            <li><a href="#">재고관리</a></li>
 	          </ul>
 	        </li>

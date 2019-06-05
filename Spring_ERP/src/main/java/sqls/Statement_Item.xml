@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.happy.erp.Statement_Item">
+<!-- 품목 등록 -->
+<insert id="insertItem" parameterType="ItemDto">
+INSERT INTO ITEM
+(ITEM_CODE, ITEM_NAME, ITEM_PRICE, ITEM_DELFLAG)
+VALUES
+((SELECT 'A' || TO_CHAR(COUNT(*)+1,'FM000') FROM ITEM), #{item_name}, #{item_price}, 'N')
+</insert>
+
+<!-- 품목 조회(페이징) -->
+<select id="itemListRow" parameterType="Pagination" resultType="ItemDto">
+SELECT ITEM_CODE, ITEM_NAME, ITEM_PRICE, ITEM_DELFLAG
+FROM 
+(SELECT ROWNUM RNUM, ITEM_CODE, ITEM_NAME, ITEM_PRICE, ITEM_DELFLAG
+FROM
+(SELECT ITEM_CODE, ITEM_NAME, ITEM_PRICE, ITEM_DELFLAG
+FROM ITEM
+ORDER BY ITEM_CODE DESC)
+)
+WHERE RNUM BETWEEN #{start} AND #{last}
+</select>
+
+<!-- 품목 총 갯수 조회 -->
+<select id="itemListTotal" resultType="java.lang.Integer">
+SELECT COUNT(*) FROM ITEM
+</select>
+
+<!-- 품목 상세 조회 -->
+<select id="detailItem" parameterType="java.lang.String" resultType="ItemDto">
+SELECT ITEM_CODE, ITEM_NAME, ITEM_PRICE, ITEM_DELFLAG 
+FROM ITEM
+WHERE ITEM_CODE=#{item_code}
+</select>
+
+<!-- 품목 수정 -->
+<update id="modifyItem" parameterType="java.util.Map">
+UPDATE ITEM
+SET ITEM_NAME=#{item_name}, ITEM_PRICE=#{item_price}
+WHERE ITEM_CODE=#{item_code}
+</update>
+
+<!-- 품목 삭제 -->
+<update id="deleteItem" parameterType="java.lang.String">
+UPDATE ITEM
+SET ITEM_DELFLAG='Y'
+WHERE ITEM_CODE=#{item_code}
+</update>
+
+</mapper>
